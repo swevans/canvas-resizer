@@ -81,10 +81,13 @@ module swevans
 		/** @private The current height of the canvas. */
 		private _height:number = undefined;
 		
+		/** @private Indicates if the canvas resizer is disposed. */
+		private _isDisposed:boolean = false;
+		
 		/** @private The current scale being applied to the canvas to achieve high definition rendering. */
 		private _contentScaleFactor = 1;
 		/** number: Gets the current scale being applied to the canvas to achieve high definition rendering. */
-		public get contentScaleFactor():boolean { return this._contentScaleFactor; }
+		public get contentScaleFactor():number { return this._contentScaleFactor; }
 		
 		/** @private Indicates if the canvas should be rendered at high definition. */
 		private _highDefinition:boolean = true;
@@ -124,6 +127,18 @@ module swevans
 			
 			// do an initial resize
 			if (this._autoResize) this.resize();
+		}
+		
+		/**
+		 * Disposes of the canvas resizer by removing event listeners. No parameters, no return value.
+		 */
+		public dispose():void
+		{
+			if (this._isDisposed) return;
+			this._isDisposed = true;
+			
+			// stop listening for events
+			window.removeEventListener("resize", this.window_resize, false);
 		}
 		//}
 		

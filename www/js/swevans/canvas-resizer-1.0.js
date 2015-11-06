@@ -83,6 +83,8 @@ var swevans;
             this._width = undefined;
             /** @private The current height of the canvas. */
             this._height = undefined;
+            /** @private Indicates if the canvas resizer is disposed. */
+            this._isDisposed = false;
             /** @private The current scale being applied to the canvas to achieve high definition rendering. */
             this._contentScaleFactor = 1;
             /** @private Indicates if the canvas should be rendered at high definition. */
@@ -127,6 +129,16 @@ var swevans;
             enumerable: true,
             configurable: true
         });
+        /**
+         * Disposes of the canvas resizer by removing event listeners. No parameters, no return value.
+         */
+        CanvasResizer.prototype.dispose = function () {
+            if (this._isDisposed)
+                return;
+            this._isDisposed = true;
+            // stop listening for events
+            window.removeEventListener("resize", this.window_resize, false);
+        };
         //}
         //{ Resizing
         /**
