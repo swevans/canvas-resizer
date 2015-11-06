@@ -19,28 +19,34 @@ Note that this demo might not have any effect on your desktop browser as logical
 <a href="http://spencer-evans.com/share/github/canvas-resizer/" target="_blank">CanvasResizer Demo</a>
 
 ## Usage ##
-Download the repo and copy the www/js/swevans/viewport-config-X.X.js file into your project.
+Download the repo and copy the www/js/swevans/canvas-resizer-X.X.js file into your project.
 
-Include viewport-config-X.X.js in your JavaScript bundle or add it to your HTML page like this.
+Include canvas-resizer-X.X.js in your JavaScript bundle or add it to your HTML page like this.
 
 ```html
-<script type='application/javascript' src='/path/to/viewport-config-1.0.js'></script>
+<script type='application/javascript' src='/path/to/canvas-resizer-1.0.js'></script>
 ```
-The script must be loaded prior to using it within your code. ViewportConfig follows a static interface and exists in a the "swevans" namespace, and thus does not need to be instantiated. Use the class directly to get / set viewport tag content properties:
+The script must be loaded prior to using it within your code.
+
+Note that when a canvas is resized, the graphics must be redrawn. This is built into canvas behavior and make sense, but explaining why is beyond the scope of this document. You can handle this by listening for 'resize' events on your canvas element and redrawing your graphics each time it happens. 
+
+CanvasResizer exists in the "swevans" namespace and must be instantiated with a canvas element parameter.
 
 ```js
-// Getting the initial-scale value
-var theInitialViewportScale = swevans.ViewportConfig.initialScale;
+// Grab the canvas from the DOM
+var canvas = document.getElementById("myCanvas");
 
-// Setting the initial-scale value to some value
-// note this will change the scale on all supporting browsers
-swevans.ViewportConfig.initialScale = 5.1;
+fuction redraw()
+{
+  // redraw your canvas graphics here!
+}
 
-// Clearing a property by setting to null
-swevans.ViewportConfig.initialScale = null;
+// Watch for resize events on the canvas, redraw graphics when it happens
+canvas.addEventListener("resize", redraw, false);
+
+// Set up the resizer, note that a resize is immediately triggered and a redraw() will follow that
+var canvasResizer = new swevans.CanvasResizer(canvas);
 ```
-
-Note that if no viewport tag is included in the page, one will be created when a property is set via ViewportConfig. If multiple viewport meta tags exist, the one appearing last in the document will be used by ViewportConfig.
 
 ### The API ###
 ViewportConfig provides the following public interface:
