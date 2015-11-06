@@ -1,27 +1,22 @@
-# ViewportConfig #
+# CanvasResizer #
 
-ViewportConfig is a simple, easy-to-use JavaScript and TypeScript library for accessing and manipulating HTML <a href="http://www.w3schools.com/css/css_rwd_viewport.asp" target="_blank">viewport meta tags</a> using JavaScript. The goal is to allow you to read and write these properties on the fly without writing cumbersome logic to find the tag and access it's internals. 
+CanvasResizer is a simple, easy-to-use JavaScript and TypeScript library to improve html canvas element behavior. The goal is to create a standalone method for managing canvas dimensions and resolution, improve canvas rendering accuracy across devices, and provide callbacks to handle canvas resizes. It accomplishes these goals in 3 ways:
+<ol>
+<li>Resizes the width and height properties of a canvas element so it perfectly fills the bounds of it's parent container without stretching the image.</li>
+<li>Scales the canvas rendering area such that canvas pixels match device pixels. This makes canvas images appear pixely-prefectly-crisp on any device.</li>
+<li>Dispatches 'resize' events on the canvas element any time it is resized.</li>
+</ol>
+An example is provided below to show off the capabilities.
 
-## Why access this tag? ##
-For starters, there are a sizeable of people on the internet <a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=get+viewport+scale" target="_blank">looking for javascript functionality surrounding the viewport</a>. There are also instances were you might need to scale elements or assets based on the viewport scale. 
+## Why manage canvas size? ##
+The canvas element behaves more like an image than any other HTML element. Simple CSS sizing will result in a stretched canvas image. To avoid stretching, the canvas element's width and height attributes must be adjusted to match the desired size. A more <a href="http://www.kirupa.com/html5/resizing_html_canvas_element.htm" target="_blank">detailed explanation is presented here, by Kuripa</a>.
 
-This project was prompted by the need for <a href="http://www.html5rocks.com/en/tutorials/canvas/hidpi/" target="_blank">high definition canvas rendering</a> when css pixels do not match device pixels. To achieve HD rendering when the html is scaled up, the canvas element must rendered in at a larger size relative to the html scale factor. If HTML is scaled up by 2, the canvas should render contents at twice the size to prevent blurring when the browser presents the scaled canvas raster.
-
-An example:
-- Device: iPad3
-- Device Resolution: 2048x1536
-- Viewport Scale: 1
-- Pixel Ratio: 2
-- Logical Resolution: 1024x768
-
-In this instance, the device resolution is much higher than the logical resolution that the webpage is being rendered with. The webpage will effectively be rendered at half resolution and the scaled up to fit the full screen. Any canvas element within the page will be scaled up post render, which causes normally sharp graphics to blur. To compensate, we should create the canvas at twice the size and then scale it down to fit within smaller page. If the viewport was 0.5 instead of 1, the effective page resolution would be 2048x1536 (matching the device). In this case, we do not want to create an oversized canvas and thus need to know what the viewport scale is.
-
-Don't worry if this is over your head. It is just one use case.
+The canvas element also renders using a specific logical resolution as defined by the page's viewport. By default, the logical resolution is equal to, or less than, the device resolution. On modern mobile devices, the logical resolution is usually 2 or more times lower than the physical device display resolution. To avoid aliasing and stretching, The canvas render area must be scaled up to match the device resolution. A more <a href="https://coderwall.com/p/vmkk6a/how-to-make-the-canvas-not-look-like-crap-on-retina" target="_blank">detail explanation is presented here</a>.
 
 ## Demo ##
-Note that this demo might not have any effect on your desktop browser as viewport tags are only require for devices with pixel ratios other than 1 (most mobile devices). Follow the link below to see the demo.
+Note that this demo might not have any effect on your desktop browser as logical to physical pixel ratios are usually 1. Follow the link below to see the demo.
 
-<a href="http://spencer-evans.com/share/github/viewport/" target="_blank">ViewportConfig Demo</a>
+<a href="http://spencer-evans.com/share/github/canvas-resizer/" target="_blank">CanvasResizer Demo</a>
 
 ## Usage ##
 Download the repo and copy the www/js/swevans/viewport-config-X.X.js file into your project.
