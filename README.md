@@ -1,6 +1,16 @@
-# ViewportConfig #
+# CanvasResizer #
 
-ViewportConfig is a simple, easy-to-use JavaScript and TypeScript library for accessing and manipulating HTML <a href="http://www.w3schools.com/css/css_rwd_viewport.asp" target="_blank">viewport meta tags</a> using JavaScript. The goal is to allow you to read and write these properties on the fly without writing cumbersome logic to find the tag and access it's internals. 
+CanvasResizer is a simple, easy-to-use JavaScript and TypeScript library to improve html canvas element behavior. The goal is to create a standalone method for managing canvas dimensions and resolution, improve canvas rendering accuracy across devices, and provide callbacks to handle canvas resizes. It accomplishes these goals in 3 ways:
+<ol>
+<li>Resizes the width and height properties of a canvas element so it perfectly fills the bounds of it's parent container without stretching the image.</li>
+<li>Scales the canvas rendering area such that canvas pixels match device pixels. This makes canvas images appear pixely-prefectly-crisp on any device.</li>
+<li>Dispatches 'resize' events on the canvas element any time it is resized.</li>
+</ol>
+An example is provided below to show off the capabilities.
+
+The goal of CanvasResizer is to 
+
+<a href="http://www.w3schools.com/css/css_rwd_viewport.asp" target="_blank">viewport meta tags</a> using JavaScript. The goal is to allow you to read and write these properties on the fly without writing cumbersome logic to find the tag and access it's internals. 
 
 ## Why access this tag? ##
 For starters, there are a sizeable of people on the internet <a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=get+viewport+scale" target="_blank">looking for javascript functionality surrounding the viewport</a>. There are also instances were you might need to scale elements or assets based on the viewport scale. 
