@@ -27,6 +27,10 @@
 		<!-- Controls -->
 		<div style="position: fixed; top: 0px; left: 0px; width: 100%; background-color: rgba(255,255,255, 0.5);">
 			<div style="padding: 10px;">
+				<!-- A warning message to show if viewport properties do not appear to be required or supported. -->
+				<div id="mobileOnlyWarning" style="display: block; background-color: #FFD5D3;">
+					The High Definition setting only applies to browsers with pixel ratios greater than 1 (most mobile devices), it won't have an effect on your current browser.
+				</div>
 				<div id="info"></div>
 				<br/>
 				<label><input id="highDefinition" type='checkbox' onclick='toggleHD();'>High Definition</label>
@@ -80,7 +84,8 @@
 				var str = "";
 				var pixelRatio = (window.devicePixelRatio ? window.devicePixelRatio : 1);
 				str += "Logical Window Resolution .... " + screen.width + "x" + screen.height + "<br/>";
-				str += "Physical Device Resolution ... " + screen.width * pixelRatio + "x" + screen.height * pixelRatio;
+				str += "Physical Device Resolution ... " + screen.width * pixelRatio + "x" + screen.height * pixelRatio + "<br/>";
+				str += "Canvas Resolution ............ " + canvas.width + "x" + canvas.height;
 				info.innerHTML = str;
 				
 				// redraw graphics
@@ -119,6 +124,9 @@
 			
 			if (canvasResizer.autoResize) document.getElementById("autoResize").checked = true;
 			else document.getElementById("autoResize").checked = false;
+			
+			var pixelRatio = (window.devicePixelRatio ? window.devicePixelRatio : 1);
+			if (pixelRatio != 1) document.getElementById("mobileOnlyWarning").style.display = "none";
 			
 		</script>
 		

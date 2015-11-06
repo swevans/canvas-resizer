@@ -159,19 +159,21 @@ module swevans
 					if (pixelRatio != 1) scale = pixelRatio * currentScale;
 				}
 			}
-			this._contentScaleFactor = scale * scale;
+			this._contentScaleFactor = scale;
 			w *= scale;
 			h *= scale;
 			
 			// Check to see if a resize is even necessary
 			var resizeNeeded = true;
-			if (this._width === w || this._height === h) resizeNeeded = false;
+			if (this._width === w && this._height === h) resizeNeeded = false;
 			
 			// Set the new canvas size
 			if (resizeNeeded)
 			{
-				this._canvas.width = w * scale;
-				this._canvas.height = h * scale;
+				this._canvas.width = w;// * scale;
+				this._canvas.height = h;// * scale;
+				this._width = w;
+				this._height = h;
 				
 				// Reset and scale the rendering transform
 				var ctx = canvas.getContext('2d');
