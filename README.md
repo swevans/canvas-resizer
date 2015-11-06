@@ -96,8 +96,14 @@ canvasResizer.dispose();
 - You should dispose of the canvas resizer if you know you're done with it!
 
 ## Recommendations ##
-- Specify a single viewport meta tag at the top of your html files, it should include the property initial-scale=1. EX: <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=3.0, minimum-scale=0.1" />
-- Canvas sizes (width and height) must be whole numbers. When the canvas's parent element is a subpixel size (say... 800.5 by 600.5) the canvas will be 1/2 pixel too small / large. You should set the canvas style width and height to 100% to make it a perfect fit. EX: <canvas style="width: 100%; height: 100%;"></canvas>
+- Specify a single viewport meta tag at the top of your html files, it should include the property initial-scale=1. EX: 
+```html
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=3.0, minimum-scale=0.1" />
+```
+- Canvas sizes (width and height) must be whole numbers. When the canvas's parent element is a subpixel size (say... 800.5 by 600.5) the canvas will be 1/2 pixel too small / large. You should set the canvas style width and height to 100% to make it a perfect fit. EX: 
+```html
+<canvas style="width: 100%; height: 100%;"></canvas>
+```
 
 ## Known Issues and Considerations ##
 - The canvas will always be resized to fully fill it's parent element.
