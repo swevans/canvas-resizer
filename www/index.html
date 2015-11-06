@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" style="width: 100%; height: 100%;">
+	<head>
+		<meta charset="utf-8" />
+		<title>CanvasResizer Test</title>
+		
+		<script src="js/swevans/canvas-resizer-1.0.js"></script>
+		
+		<meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=5.0, minimum-scale=0.1" />
+		
+		<style>
+			* {
+				font-family: monospace;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				cursor: default;
+			}
+		</style>
+		
+	</head>
+	<body style="width: 100%; height: 100%; padding: 0px; margin: 0px;">
+		
+		<!-- Controls -->
+		<div style="position: fixed; top: 0px; left: 0px; width: 100%; background-color: rgba(255,255,255, 0.5);">
+			<div style="padding: 10px;">
+				<div id="info"></div>
+				<br/>
+				<label><input id="highDefinition" type='checkbox' onclick='toggleHD();'>High Definition</label>
+				<label><input id="autoResize" type='checkbox' onclick='toggleAutoResize();'>Auto Resize</label>
+			</div>
+		</div>
+		
+		<!-- Wrapper -->
+		<div style="width: 100%; height: 100%;">
+			
+			<!-- Header -->
+			<div style="width: 100%; height: 20%; background-color: #555555; clear: both;"></div>
+			
+			<!-- Content -->
+			<div style="width: 100%; height: 60%">
+				
+				<!-- Left -->
+				<div style="width: 20%; height: 100%; background-color: #666666; float: left;"></div>
+				
+				<!-- Canvas Holder -->
+				<div style="width: 60%; height: 100%; background-color: #FFFF00; float: left;">
+					<canvas id="myCanvas" style="width: 100%; height: 100%; background-color: #CCCCCC;"></canvas>
+				</div>
+				
+				<!-- Right -->
+				<div style="width: 20%; height: 100%; background-color: #666666; float: left;"></div>
+				
+			</div>
+			
+			<!-- Footer -->
+			<div style="width: 100%; height: 20%; background-color: #555555; clear: both;"></div>
+			
+		</div>
+		
+		
+		<script>
+			// Grab the canvas
+			var canvas = document.getElementById("myCanvas");
+			
+			// Watch for resize events on the canvas to redraw graphics
+			canvas.addEventListener("resize", resize, false);
+			
+			// Set up the resizer
+			var canvasResizer = new swevans.CanvasResizer(canvas);
+			
+			
+			function resize()
+			{
+				// Update debug info
+				var info = document.getElementById("info");
+				var str = "";
+				var pixelRatio = (window.devicePixelRatio ? window.devicePixelRatio : 1);
+				str += "Logical Window Resolution .... " + screen.width + "x" + screen.height + "<br/>";
+				str += "Physical Device Resolution ... " + screen.width * pixelRatio + "x" + screen.height * pixelRatio;
+				info.innerHTML = str;
+				
+				// redraw graphics
+				drawGraphics();
+			}
+			
+			/**
+			 * Redraws the canvas graphics
+			 */
+			function drawGraphics()
+			{
+				// Get the rendering context
+				var ctx = canvas.getContext('2d');
+				
+				// Draw a circle
+				ctx.lineWidth = 1;
+				ctx.beginPath();
+				ctx.arc(60, 60, 50, 0, 2 * Math.PI);
+				ctx.stroke();
+				
+				// Draw a rect
+				ctx.strokeRect(10, 10, 100, 100);
+				
+			}
+			
+			// trigger a resize so the canvas properly fills its elements
+			canvasResizer.resize();
+			
+			
+			function toggleHD() { canvasResizer.highDefinition = !canvasResizer.highDefinition; }
+			function toggleAutoResize() { canvasResizer.autoResize = !canvasResizer.autoResize; }
+			
+			// Check the initial settings
+			if (canvasResizer.highDefinition) document.getElementById("highDefinition").checked = true;
+			else document.getElementById("highDefinition").checked = false;
+			
+			if (canvasResizer.autoResize) document.getElementById("autoResize").checked = true;
+			else document.getElementById("autoResize").checked = false;
+			
+		</script>
+		
+	</body>
+</html>

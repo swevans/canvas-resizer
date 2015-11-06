@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+		"declaration": false,
+        "module": "commonjs",
+        "target": "es5",
+        "noImplicitAny": true,
+		"removeComments": false,
+		"out":    "../www/js/swevans/canvas-resizer-1.0.js",
+        "rootDir": ".",
+        "sourceMap": false
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
