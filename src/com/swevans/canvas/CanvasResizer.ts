@@ -160,8 +160,8 @@ module swevans
 			this._canvas.style.display = "none";
 			
 			// Measure parent without the canvas
-			var w:number = parent.clientWidth;
-			var h:number = parent.clientHeight;
+			var w:number = (<any>parent).clientWidth;
+			var h:number = (<any>parent).clientHeight;
 			
 			// Scale the canvas to match device pixels if high definition is requested and a viewport is defined
 			var scale:number = 1;
@@ -191,7 +191,7 @@ module swevans
 				this._height = h;
 				
 				// Reset and scale the rendering transform
-				var ctx = canvas.getContext('2d');
+				var ctx = this._canvas.getContext('2d');
 				ctx.setTransform(1, 0, 0, 1, 0, 0);
 				ctx.scale(this._contentScaleFactor, this._contentScaleFactor);
 			}
